@@ -69,7 +69,19 @@ void MergeSortedArrays(T* arr, uint64_t p, uint64_t q, uint64_t r)
 template<typename T>
 int64_t PartitionArray(T* arr, int64_t low, int64_t high)
 {
-	T pivot = arr[high];
+	int64_t mid = low + (high - low) / 2;
+	if (arr[low] > arr[mid]) {
+		Swap(&arr[low], &arr[mid]);
+	}
+	if (arr[low] > arr[high]) {
+		Swap(&arr[low], &arr[high]);
+	}
+	if (arr[mid] > arr[high]) {
+		Swap(&arr[mid], &arr[high]);
+	}
+	T pivot = arr[mid];
+	Swap(&arr[mid], &arr[high]);
+
 	int64_t i = low - 1;
 	for (int64_t j = low; j < high; j++) {
 		if (arr[j] < pivot) {

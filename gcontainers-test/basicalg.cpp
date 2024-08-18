@@ -118,11 +118,11 @@ TEST(PartitionArray, Basic)
 {
 	int arr[] = { 10, 7, 8, 9, 1, 5 };
 
-	int expected[] = { 1, 5, 8, 9, 10, 7 };
+	int expected[] = { 5, 7, 1, 8, 10, 9 };
 
 	int64_t result = PartitionArray(arr, 0, 5);
 
-	ASSERT_EQ(1, result);
+	ASSERT_EQ(3, result);
 	for (int i = 0; i < 6; i++) {
 		ASSERT_EQ(expected[i], arr[i]);
 	}
