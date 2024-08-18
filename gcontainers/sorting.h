@@ -15,9 +15,7 @@ void BubbleSort(T* arr, uint64_t size)
 		noSwaps = true;
 		for (uint64_t j = 0; j < size - i - 1; j++) {
 			if (arr[j] > arr[j + 1]) {
-				T tmp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = tmp;
+				Swap(&arr[j], &arr[j + 1]);
 				noSwaps = false;
 			}
 		}
@@ -41,9 +39,7 @@ void SelectionSort(T* arr, uint64_t size)
 			}
 		}
 		if (minIndex != i) {
-			T tmp = arr[i];
-			arr[i] = arr[minIndex];
-			arr[minIndex] = tmp;
+			Swap(&arr[i], &arr[minIndex]);
 		}
 	}
 }

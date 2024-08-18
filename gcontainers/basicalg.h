@@ -3,6 +3,14 @@
 #include <cstdint>
 
 template<typename T>
+void Swap(T* a, T* b)
+{
+	T tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+template<typename T>
 void MergeSortedArrays(const T* arr1, uint64_t size1, const T* arr2, uint64_t size2, T* result)
 {
 	uint64_t i = 0;
@@ -66,13 +74,9 @@ int64_t PartitionArray(T* arr, int64_t low, int64_t high)
 	for (int64_t j = low; j < high; j++) {
 		if (arr[j] < pivot) {
 			i++;
-			T tmp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = tmp;
+			Swap(&arr[i], &arr[j]);
 		}
 	}
-	T tmp = arr[i + 1];
-	arr[i + 1] = arr[high];
-	arr[high] = tmp;
+	Swap(&arr[i + 1], &arr[high]);
 	return i + 1;
 }
