@@ -131,3 +131,16 @@ TEST(QuickSort, Duplicates)
 		ASSERT_EQ(expected[i], arr[i]);
 	}
 }
+
+TEST(CountingSort, Basic)
+{
+	int arr[] = { -4, -2, 2, 8, 3, 3, 1 };
+
+	int expected[] = { -4, -2, 1, 2, 3, 3, 8 };
+
+	CountingSort(arr, 7, -4, 8);
+
+	for (int i = 0; i < 7; i++) {
+		ASSERT_EQ(expected[i], arr[i]);
+	}
+}

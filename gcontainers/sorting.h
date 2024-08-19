@@ -26,7 +26,7 @@ void BubbleSort(T* arr, uint64_t size)
 }
 
 /*
-	n^2, space=1
+	n^2, space=1, not stable
 */
 template<typename T>
 void SelectionSort(T* arr, uint64_t size)
@@ -78,7 +78,7 @@ void MergeSort(T* arr, uint64_t left, uint64_t right)
 }
 
 /*
-	nlog2(n), space=log2(n)
+	nlog2(n), space=log2(n), not stable
 
 	If the data is already sorted and the pivot is always first/last element, it will be n^2.
 
@@ -92,5 +92,30 @@ void QuickSort(T* arr, int64_t left, int64_t right)
 		int64_t pivot = PartitionArray(arr, left, right);
 		QuickSort(arr, left, pivot - 1);
 		QuickSort(arr, pivot + 1, right);
+	}
+}
+
+/*
+	Many integer values with small range.
+*/
+template<typename T>
+void CountingSort(T* arr, int64_t size, T min, T max)
+{	
+	uint64_t* cumhist = (uint64_t*)calloc(max - min + 1, sizeof(uint64_t));
+	for (int64_t i = 0; i < size; i++) {
+		cumhist[arr[i] - min]++;
+	}
+	for (uint64_t i = 1; i < max - min + 1; i++) {
+		cumhist[i] += cumhist[i - 1];
+	}
+
+	T* result = (T*)malloc(size * sizeof(T));
+	for (int64_t i = size - 1; i >= 0; i--) {
+		result[cumhist[arr[i] - min] - 1] = arr[i];
+		cumhist[arr[i] - min]--;
+	}
+
+	for (int64_t i = 0; i < size; i++) {
+		arr[i] = result[i];
 	}
 }
