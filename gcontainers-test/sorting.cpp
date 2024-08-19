@@ -144,3 +144,16 @@ TEST(CountingSort, Basic)
 		ASSERT_EQ(expected[i], arr[i]);
 	}
 }
+
+TEST(RadixSort, Basic)
+{
+	int arr[] = { 121, 432, 564, 23, 1, 45, 788 };
+
+	int expected[] = { 1, 23, 45, 121, 432, 564, 788 };
+
+	RadixSort(arr, 7);
+
+	for (int i = 0; i < 7; i++) {
+		ASSERT_EQ(expected[i], arr[i]);
+	}
+}

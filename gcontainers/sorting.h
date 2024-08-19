@@ -119,3 +119,34 @@ void CountingSort(T* arr, int64_t size, T min, T max)
 		arr[i] = result[i];
 	}
 }
+
+template<typename T>
+void RadixSort(T* arr, int64_t size)
+{
+	T max = arr[0];
+	for (int64_t i = 1; i < size; i++) {
+		if (arr[i] > max) {
+			max = arr[i];
+		}
+	}
+
+	for (uint64_t place = 1; max / place > 0; place *= 10) {
+		uint64_t cumhist[10] = { 0 };
+		for (int64_t i = 0; i < size; i++) {
+			cumhist[(arr[i] / place) % 10]++;
+		}
+		for (uint64_t i = 1; i < 10; i++) {
+			cumhist[i] += cumhist[i - 1];
+		}
+
+		T* result = (T*)malloc(size * sizeof(T));
+		for (int64_t i = size - 1; i >= 0; i--) {
+			result[cumhist[(arr[i] / place) % 10] - 1] = arr[i];
+			cumhist[(arr[i] / place) % 10]--;
+		}
+
+		for (int64_t i = 0; i < size; i++) {
+			arr[i] = result[i];
+		}
+	}
+}
