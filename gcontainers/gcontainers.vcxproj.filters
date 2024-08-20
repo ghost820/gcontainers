@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Containers">
+      <UniqueIdentifier>{4082b78c-f2ea-4ae7-b19d-7726876a57f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="searching.h">
@@ -28,6 +31,9 @@
   <ItemGroup>
     <ClCompile Include="sorting.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClCompile>
+    <ClCompile Include="singlylinkedlist.h">
+      <Filter>Pliki nagłówkowe\Containers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

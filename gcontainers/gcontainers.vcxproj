@@ -132,6 +132,7 @@
     <ClInclude Include="searching.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="singlylinkedlist.h" />
     <ClCompile Include="sorting.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
