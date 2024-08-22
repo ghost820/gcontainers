@@ -2,52 +2,6 @@
 
 #include "../gcontainers/singlylinkedlist.h"
 
-TEST(SinglyLinkedList, PushBack)
-{
-	SinglyLinkedList<int> list;
-	SllInit(&list);
-
-	int data1 = 42;
-	int data2 = 1337;
-	int	data3 = 9001;
-	SllPushBack(&list, &data1);
-	SllPushBack(&list, &data2);
-	SllPushBack(&list, &data3);
-
-	ASSERT_EQ(3, list.size);
-
-	ASSERT_EQ(42, list.head->data);
-	ASSERT_EQ(1337, list.head->next->data);
-	ASSERT_EQ(9001, list.head->next->next->data);
-
-	ASSERT_EQ(9001, list.tail->data);
-
-	ASSERT_EQ(NULL, list.head->next->next->next);
-}
-
-TEST(SinglyLinkedList, PushFront)
-{
-	SinglyLinkedList<int> list;
-	SllInit(&list);
-
-	int data1 = 42;
-	int data2 = 1337;
-	int	data3 = 9001;
-	SllPushFront(&list, &data1);
-	SllPushFront(&list, &data2);
-	SllPushFront(&list, &data3);
-
-	ASSERT_EQ(3, list.size);
-
-	ASSERT_EQ(9001, list.head->data);
-	ASSERT_EQ(1337, list.head->next->data);
-	ASSERT_EQ(42, list.head->next->next->data);
-
-	ASSERT_EQ(42, list.tail->data);
-
-	ASSERT_EQ(NULL, list.head->next->next->next);
-}
-
 TEST(SinglyLinkedList, Get_EmptyList)
 {
 	SinglyLinkedList<int> list;
@@ -155,38 +109,53 @@ TEST(SinglyLinkedList, Set_TwoElements)
 	ASSERT_EQ(9002, list.head->next->data);
 }
 
-TEST(SinglyLinkedList, PopBack_EmptyList)
+TEST(SinglyLinkedList, PushBack)
 {
 	SinglyLinkedList<int> list;
 	SllInit(&list);
 
-	int dummy;
-	SllPopBack<int>(&list, NULL);
-	SllPopBack<int>(&list, &dummy);
+	int data1 = 42;
+	int data2 = 1337;
+	int	data3 = 9001;
+	SllPushBack(&list, &data1);
+	SllPushBack(&list, &data2);
+	SllPushBack(&list, &data3);
 
-	ASSERT_EQ(0, list.size);
-	ASSERT_EQ(NULL, list.head);
-	ASSERT_EQ(NULL, list.tail);
+	ASSERT_EQ(3, list.size);
+
+	ASSERT_EQ(42, list.head->data);
+	ASSERT_EQ(1337, list.head->next->data);
+	ASSERT_EQ(9001, list.head->next->next->data);
+
+	ASSERT_EQ(9001, list.tail->data);
+
+	ASSERT_EQ(NULL, list.head->next->next->next);
 }
 
-TEST(SinglyLinkedList, PopBack_OneElement)
+TEST(SinglyLinkedList, PushFront)
 {
 	SinglyLinkedList<int> list;
 	SllInit(&list);
 
-	int data = 42;
-	SllPushBack(&list, &data);
+	int data1 = 42;
+	int data2 = 1337;
+	int	data3 = 9001;
+	SllPushFront(&list, &data1);
+	SllPushFront(&list, &data2);
+	SllPushFront(&list, &data3);
 
-	int result;
-	SllPopBack<int>(&list, &result);
+	ASSERT_EQ(3, list.size);
 
-	ASSERT_EQ(0, list.size);
-	ASSERT_EQ(NULL, list.head);
-	ASSERT_EQ(NULL, list.tail);
-	ASSERT_EQ(42, result);
+	ASSERT_EQ(9001, list.head->data);
+	ASSERT_EQ(1337, list.head->next->data);
+	ASSERT_EQ(42, list.head->next->next->data);
+
+	ASSERT_EQ(42, list.tail->data);
+
+	ASSERT_EQ(NULL, list.head->next->next->next);
 }
 
-TEST(SinglyLinkedList, PopBack_ThreeElements)
+TEST(SinglyLinkedList, PopBack)
 {
 	SinglyLinkedList<int> list;
 	SllInit(&list);
@@ -199,7 +168,7 @@ TEST(SinglyLinkedList, PopBack_ThreeElements)
 	SllPushBack(&list, &data3);
 
 	int result;
-	SllPopBack<int>(&list, &result);
+	SllPopBack(&list, &result);
 
 	ASSERT_EQ(2, list.size);
 	ASSERT_EQ(42, list.head->data);
@@ -215,46 +184,21 @@ TEST(SinglyLinkedList, PopBack_ThreeElements)
 	ASSERT_EQ(42, list.tail->data);
 	ASSERT_EQ(NULL, list.tail->next);
 
-	SllPopBack<int>(&list, &result);
+	SllPopBack(&list, &result);
 
 	ASSERT_EQ(0, list.size);
 	ASSERT_EQ(NULL, list.head);
 	ASSERT_EQ(NULL, list.tail);
 	ASSERT_EQ(42, result);
-}
 
-TEST(SinglyLinkedList, PopFront_EmptyList)
-{
-	SinglyLinkedList<int> list;
-	SllInit(&list);
-
-	int dummy;
-	SllPopFront<int>(&list, NULL);
-	SllPopFront<int>(&list, &dummy);
+	SllPopBack(&list, &result);
 
 	ASSERT_EQ(0, list.size);
 	ASSERT_EQ(NULL, list.head);
 	ASSERT_EQ(NULL, list.tail);
 }
 
-TEST(SinglyLinkedList, PopFront_OneElement)
-{
-	SinglyLinkedList<int> list;
-	SllInit(&list);
-
-	int data = 42;
-	SllPushBack(&list, &data);
-
-	int result;
-	SllPopFront<int>(&list, &result);
-
-	ASSERT_EQ(0, list.size);
-	ASSERT_EQ(NULL, list.head);
-	ASSERT_EQ(NULL, list.tail);
-	ASSERT_EQ(42, result);
-}
-
-TEST(SinglyLinkedList, PopFront_ThreeElements)
+TEST(SinglyLinkedList, PopFront)
 {
 	SinglyLinkedList<int> list;
 	SllInit(&list);
@@ -267,7 +211,7 @@ TEST(SinglyLinkedList, PopFront_ThreeElements)
 	SllPushBack(&list, &data3);
 
 	int result;
-	SllPopFront<int>(&list, &result);
+	SllPopFront(&list, &result);
 
 	ASSERT_EQ(2, list.size);
 	ASSERT_EQ(1337, list.head->data);
@@ -283,12 +227,18 @@ TEST(SinglyLinkedList, PopFront_ThreeElements)
 	ASSERT_EQ(9001, list.tail->data);
 	ASSERT_EQ(NULL, list.tail->next);
 
-	SllPopFront<int>(&list, &result);
+	SllPopFront(&list, &result);
 
 	ASSERT_EQ(0, list.size);
 	ASSERT_EQ(NULL, list.head);
 	ASSERT_EQ(NULL, list.tail);
 	ASSERT_EQ(9001, result);
+
+	SllPopFront(&list, &result);
+
+	ASSERT_EQ(0, list.size);
+	ASSERT_EQ(NULL, list.head);
+	ASSERT_EQ(NULL, list.tail);
 }
 
 TEST(SinglyLinkedList, Insert)
