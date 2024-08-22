@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basicalg.cpp" />
+    <ClCompile Include="doublylinkedlist.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="searching.cpp" />
     <ClCompile Include="pch.cpp">

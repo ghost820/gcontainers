@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="basicalg.h" />
+    <ClInclude Include="doublylinkedlist.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="searching.h" />
   </ItemGroup>
