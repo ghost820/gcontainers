@@ -24,6 +24,53 @@ void DllInit(DoublyLinkedList<T>* list) {
 }
 
 template<typename T>
+bool DllGet(const DoublyLinkedList<T>* list, uint64_t idx, T* result) {
+	if (idx >= list->size) {
+		return false;
+	}
+
+	if (idx <= list->size / 2) {
+		DllNode<T>* node = list->head;
+		for (uint64_t i = 0; i < idx; i++) {
+			node = node->next;
+		}
+		*result = node->data;
+	} else {
+		DllNode<T>* node = list->tail;
+		for (uint64_t i = list->size - 1; i > idx; i--) {
+			node = node->prev;
+		}
+		*result = node->data;
+	}
+
+	return true;
+}
+
+template<typename T>
+bool DllSet(DoublyLinkedList<T>* list, uint64_t idx, const T* data) {
+	if (idx >= list->size) {
+		return false;
+	}
+
+	if (idx <= list->size / 2) {
+		DllNode<T>* node = list->head;
+		for (uint64_t i = 0; i < idx; i++) {
+			node = node->next;
+		}
+		node->data = *data;
+	}
+	else {
+		DllNode<T>* node = list->tail;
+		for (uint64_t i = list->size - 1; i > idx; i--) {
+			node = node->prev;
+		}
+		node->data = *data;
+	}
+
+	return true;
+}
+
+template<typename T>
 void DllPushBack(DoublyLinkedList<T>* list, const T* data) {
 	DllNode<T>* node = (DllNode<T>*)malloc(sizeof(DllNode<T>));
 	node->data = *data;
@@ -105,4 +152,91 @@ void DllPopFront(DoublyLinkedList<T>* list, T* result) {
 		*result = node->data;
 	}
 	free(node);
+}
+
+template<typename T>
+bool DllInsert(DoublyLinkedList<T>* list, uint64_t idx, const T* data) {
+	if (idx > list->size) {
+		return false;
+	}
+
+	if (idx == 0) {
+		DllPushFront(list, data);
+		return true;
+	}
+
+	if (idx == list->size) {
+		DllPushBack(list, data);
+		return true;
+	}
+
+	DllNode<T>* node = (DllNode<T>*)malloc(sizeof(DllNode<T>));
+	node->data = *data;
+	node->prev = NULL;
+	node->next = NULL;
+
+	DllNode<T>* prev;
+	if (idx - 1 <= list->size / 2) {
+		prev = list->head;
+		for (uint64_t i = 0; i < idx - 1; i++) {
+			prev = prev->next;
+		}
+	} else {
+		prev = list->tail;
+		for (uint64_t i = list->size - 1; i > idx - 1; i--) {
+			prev = prev->prev;
+		}
+	}
+	DllNode<T>* next = prev->next;
+
+	prev->next = node;
+	node->prev = prev;
+	node->next = next;
+	next->prev = node;
+	list->size++;
+
+	return true;
+}
+
+template<typename T>
+bool DllRemove(DoublyLinkedList<T>* list, uint64_t idx, T* result) {
+	if (idx >= list->size) {
+		return false;
+	}
+
+	if (idx == 0) {
+		DllPopFront(list, result);
+		return true;
+	}
+
+	if (idx == list->size - 1) {
+		DllPopBack(list, result);
+		return true;
+	}
+
+	DllNode<T>* node;
+	if (idx <= list->size / 2) {
+		node = list->head;
+		for (uint64_t i = 0; i < idx; i++) {
+			node = node->next;
+		}
+	} else {
+		node = list->tail;
+		for (uint64_t i = list->size - 1; i > idx; i--) {
+			node = node->prev;
+		}
+	}
+	DllNode<T>* prev = node->prev;
+	DllNode<T>* next = node->next;
+
+	prev->next = next;
+	next->prev = prev;
+	list->size--;
+
+	if (result != NULL) {
+		*result = node->data;
+	}
+	free(node);
+
+	return true;
 }

@@ -9,7 +9,9 @@
     <ClCompile Include="singlylinkedlist.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
-    <ClCompile Include="doublylinkedlist.cpp" />
+    <ClCompile Include="doublylinkedlist.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

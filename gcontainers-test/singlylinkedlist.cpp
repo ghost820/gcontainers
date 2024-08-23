@@ -8,8 +8,8 @@ TEST(SinglyLinkedList, Get_EmptyList)
 	SllInit(&list);
 
 	int dummy;
-	bool result1 = SllGet<int>(&list, 0, &dummy);
-	bool result2 = SllGet<int>(&list, 1, &dummy);
+	bool result1 = SllGet(&list, 0, &dummy);
+	bool result2 = SllGet(&list, 1, &dummy);
 
 	ASSERT_FALSE(result1);
 	ASSERT_FALSE(result2);
@@ -25,8 +25,8 @@ TEST(SinglyLinkedList, Get_OneElement)
 
 	int resultValue;
 	int dummy;
-	bool result1 = SllGet<int>(&list, 0, &resultValue);
-	bool result2 = SllGet<int>(&list, 1, &dummy);
+	bool result1 = SllGet(&list, 0, &resultValue);
+	bool result2 = SllGet(&list, 1, &dummy);
 
 	ASSERT_TRUE(result1);
 	ASSERT_FALSE(result2);
@@ -45,9 +45,10 @@ TEST(SinglyLinkedList, Get_TwoElements)
 
 	int resultValue1;
 	int resultValue2;
-	bool result1 = SllGet<int>(&list, 0, &resultValue1);
-	bool result2 = SllGet<int>(&list, 1, &resultValue2);
-	bool result3 = SllGet<int>(&list, 2, NULL);
+	int dummy;
+	bool result1 = SllGet(&list, 0, &resultValue1);
+	bool result2 = SllGet(&list, 1, &resultValue2);
+	bool result3 = SllGet(&list, 2, &dummy);
 
 	ASSERT_TRUE(result1);
 	ASSERT_TRUE(result2);
@@ -61,9 +62,9 @@ TEST(SinglyLinkedList, Set_EmptyList)
 	SinglyLinkedList<int> list;
 	SllInit(&list);
 
-	int data = 42;
-	bool result1 = SllSet<int>(&list, 0, &data);
-	bool result2 = SllSet<int>(&list, 1, &data);
+	int newData = 42;
+	bool result1 = SllSet(&list, 0, &newData);
+	bool result2 = SllSet(&list, 1, &newData);
 
 	ASSERT_FALSE(result1);
 	ASSERT_FALSE(result2);
@@ -78,8 +79,8 @@ TEST(SinglyLinkedList, Set_OneElement)
 	SllPushBack(&list, &data);
 
 	int newData = 1337;
-	bool result1 = SllSet<int>(&list, 0, &newData);
-	bool result2 = SllSet<int>(&list, 1, &newData);
+	bool result1 = SllSet(&list, 0, &newData);
+	bool result2 = SllSet(&list, 1, &newData);
 
 	ASSERT_TRUE(result1);
 	ASSERT_FALSE(result2);
@@ -98,9 +99,9 @@ TEST(SinglyLinkedList, Set_TwoElements)
 
 	int newData1 = 9001;
 	int newData2 = 9002;
-	bool result1 = SllSet<int>(&list, 0, &newData1);
-	bool result2 = SllSet<int>(&list, 1, &newData2);
-	bool result3 = SllSet<int>(&list, 2, &newData1);
+	bool result1 = SllSet(&list, 0, &newData1);
+	bool result2 = SllSet(&list, 1, &newData2);
+	bool result3 = SllSet(&list, 2, &newData1);
 
 	ASSERT_TRUE(result1);
 	ASSERT_TRUE(result2);
