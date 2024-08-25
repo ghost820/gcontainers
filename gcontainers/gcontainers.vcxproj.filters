@@ -30,6 +30,9 @@
     <ClInclude Include="doublylinkedlist.h">
       <Filter>Pliki nagłówkowe\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="bst.h">
+      <Filter>Pliki nagłówkowe\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sorting.h">

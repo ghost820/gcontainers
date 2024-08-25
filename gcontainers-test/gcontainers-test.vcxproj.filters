@@ -12,6 +12,9 @@
     <ClCompile Include="doublylinkedlist.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
+    <ClCompile Include="bst.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
