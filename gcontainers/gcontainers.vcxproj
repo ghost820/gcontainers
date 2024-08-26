@@ -130,6 +130,7 @@
     <ClInclude Include="basicalg.h" />
     <ClInclude Include="bst.h" />
     <ClInclude Include="doublylinkedlist.h" />
+    <ClInclude Include="heap.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="searching.h" />
   </ItemGroup>

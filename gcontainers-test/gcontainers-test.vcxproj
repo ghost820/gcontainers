@@ -102,6 +102,7 @@
     <ClCompile Include="basicalg.cpp" />
     <ClCompile Include="bst.cpp" />
     <ClCompile Include="doublylinkedlist.cpp" />
+    <ClCompile Include="heap.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="searching.cpp" />
     <ClCompile Include="pch.cpp">
