@@ -84,3 +84,156 @@ TEST(BST, Insert)
 	ASSERT_EQ(16, bst.root->right->right->data);
 	ASSERT_EQ(7, bst.root->left->right->data);
 }
+
+TEST(BST, TraverseBFS_EmptyTree)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	TraverseBFS<int>(&bst, NULL);
+}
+
+std::vector<int> TraverseBST_Result;
+void TraverseBST_Callback(const int* data) {
+	TraverseBST_Result.push_back(*data);
+}
+
+TEST(BST, TraverseBFS_OneElement)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	int data = 10;
+	BSTInsert(&bst, &data);
+
+	TraverseBFS(&bst, TraverseBST_Callback);
+
+	ASSERT_EQ(1, TraverseBST_Result.size());
+	ASSERT_EQ(10, TraverseBST_Result[0]);
+
+	TraverseBST_Result.clear();
+}
+
+TEST(BST, TraverseBFS)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	int data1 = 10;
+	int data2 = 6;
+	int data3 = 15;
+	int data4 = 3;
+	int data5 = 8;
+	int data6 = 20;
+	BSTInsert(&bst, &data1);
+	BSTInsert(&bst, &data2);
+	BSTInsert(&bst, &data3);
+	BSTInsert(&bst, &data4);
+	BSTInsert(&bst, &data5);
+	BSTInsert(&bst, &data6);
+
+	TraverseBFS(&bst, TraverseBST_Callback);
+
+	ASSERT_EQ(6, TraverseBST_Result.size());
+	ASSERT_EQ(10, TraverseBST_Result[0]);
+	ASSERT_EQ(6, TraverseBST_Result[1]);
+	ASSERT_EQ(15, TraverseBST_Result[2]);
+	ASSERT_EQ(3, TraverseBST_Result[3]);
+	ASSERT_EQ(8, TraverseBST_Result[4]);
+	ASSERT_EQ(20, TraverseBST_Result[5]);
+
+	TraverseBST_Result.clear();
+}
+
+TEST(BST, TraversePreOrder)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	int data1 = 10;
+	int data2 = 6;
+	int data3 = 15;
+	int data4 = 3;
+	int data5 = 8;
+	int data6 = 20;
+	BSTInsert(&bst, &data1);
+	BSTInsert(&bst, &data2);
+	BSTInsert(&bst, &data3);
+	BSTInsert(&bst, &data4);
+	BSTInsert(&bst, &data5);
+	BSTInsert(&bst, &data6);
+	
+	TraversePreOrder(bst.root, TraverseBST_Callback);
+
+	ASSERT_EQ(6, TraverseBST_Result.size());
+	ASSERT_EQ(10, TraverseBST_Result[0]);
+	ASSERT_EQ(6, TraverseBST_Result[1]);
+	ASSERT_EQ(3, TraverseBST_Result[2]);
+	ASSERT_EQ(8, TraverseBST_Result[3]);
+	ASSERT_EQ(15, TraverseBST_Result[4]);
+	ASSERT_EQ(20, TraverseBST_Result[5]);
+
+	TraverseBST_Result.clear();
+}
+
+TEST(BST, TraverseInOrder)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	int data1 = 10;
+	int data2 = 6;
+	int data3 = 15;
+	int data4 = 3;
+	int data5 = 8;
+	int data6 = 20;
+	BSTInsert(&bst, &data1);
+	BSTInsert(&bst, &data2);
+	BSTInsert(&bst, &data3);
+	BSTInsert(&bst, &data4);
+	BSTInsert(&bst, &data5);
+	BSTInsert(&bst, &data6);
+
+	TraverseInOrder(bst.root, TraverseBST_Callback);
+
+	ASSERT_EQ(6, TraverseBST_Result.size());
+	ASSERT_EQ(3, TraverseBST_Result[0]);
+	ASSERT_EQ(6, TraverseBST_Result[1]);
+	ASSERT_EQ(8, TraverseBST_Result[2]);
+	ASSERT_EQ(10, TraverseBST_Result[3]);
+	ASSERT_EQ(15, TraverseBST_Result[4]);
+	ASSERT_EQ(20, TraverseBST_Result[5]);
+
+	TraverseBST_Result.clear();
+}
+
+TEST(BST, TraversePostOrder)
+{
+	BST<int> bst;
+	BSTInit(&bst);
+
+	int data1 = 10;
+	int data2 = 6;
+	int data3 = 15;
+	int data4 = 3;
+	int data5 = 8;
+	int data6 = 20;
+	BSTInsert(&bst, &data1);
+	BSTInsert(&bst, &data2);
+	BSTInsert(&bst, &data3);
+	BSTInsert(&bst, &data4);
+	BSTInsert(&bst, &data5);
+	BSTInsert(&bst, &data6);
+
+	TraversePostOrder(bst.root, TraverseBST_Callback);
+
+	ASSERT_EQ(6, TraverseBST_Result.size());
+	ASSERT_EQ(3, TraverseBST_Result[0]);
+	ASSERT_EQ(8, TraverseBST_Result[1]);
+	ASSERT_EQ(6, TraverseBST_Result[2]);
+	ASSERT_EQ(20, TraverseBST_Result[3]);
+	ASSERT_EQ(15, TraverseBST_Result[4]);
+	ASSERT_EQ(10, TraverseBST_Result[5]);
+
+	TraverseBST_Result.clear();
+}

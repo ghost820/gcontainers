@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "doublylinkedlist.h"
+
 template<typename T>
 struct BSTNode {
 	T data;
@@ -71,4 +73,73 @@ void BSTInsert(BST<T>* bst, const T* data) {
 			current = current->right;
 		}
 	}
+}
+
+/*
+	More memory for wider trees.
+*/
+template<typename T>
+void TraverseBFS(const BST<T>* bst, void (*callback)(const T*)) {
+	if (bst->root == NULL) {
+		return;
+	}
+	
+	DoublyLinkedList<BSTNode<T>*> queue;
+	DllInit(&queue);
+
+	DllPushBack(&queue, &bst->root);
+
+	while (queue.size) {
+		BSTNode<T>* node;
+		DllPopFront(&queue, &node);
+
+		callback(&node->data);
+
+		if (node->left) {
+			DllPushBack(&queue, &node->left);
+		}
+		if (node->right) {
+			DllPushBack(&queue, &node->right);
+		}
+	}
+}
+
+/*
+	More memory for deeper trees.
+*/
+template<typename T>
+void TraversePreOrder(const BSTNode<T>* node, void (*callback)(const T*)) {
+	callback(&node->data);
+	
+	if (node->left) {
+		TraversePreOrder(node->left, callback);
+	}
+	if (node->right) {
+		TraversePreOrder(node->right, callback);
+	}
+}
+
+template<typename T>
+void TraverseInOrder(const BSTNode<T>* node, void (*callback)(const T*)) {
+	if (node->left) {
+		TraverseInOrder(node->left, callback);
+	}
+	
+	callback(&node->data);
+	
+	if (node->right) {
+		TraverseInOrder(node->right, callback);
+	}
+}
+
+template<typename T>
+void TraversePostOrder(const BSTNode<T>* node, void (*callback)(const T*)) {
+	if (node->left) {
+		TraversePostOrder(node->left, callback);
+	}
+	if (node->right) {
+		TraversePostOrder(node->right, callback);
+	}
+
+	callback(&node->data);
 }
