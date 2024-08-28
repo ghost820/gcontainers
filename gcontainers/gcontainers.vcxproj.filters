@@ -36,6 +36,9 @@
     <ClInclude Include="heap.h">
       <Filter>Pliki nagłówkowe\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="hashmap.h">
+      <Filter>Pliki nagłówkowe\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sorting.h">

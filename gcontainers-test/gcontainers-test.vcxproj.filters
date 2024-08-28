@@ -18,6 +18,9 @@
     <ClCompile Include="heap.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
+    <ClCompile Include="hashmap.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
