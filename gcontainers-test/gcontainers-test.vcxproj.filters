@@ -21,6 +21,9 @@
     <ClCompile Include="hashmap.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
+    <ClCompile Include="graph.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

@@ -18,7 +18,7 @@ struct HashMap {
 	DoublyLinkedList<HashMapEntry<T>> data[HASHMAP_SIZE];
 };
 
-uint64_t Hash(const char* str) {
+static uint64_t Hash(const char* str) {
 	uint64_t hash = 0;
 	while (*str) {
 		hash = (hash * 31 + *str) % HASHMAP_SIZE;
@@ -53,6 +53,26 @@ bool HashMapGet(const HashMap<T>* map, const char* key, T* result) {
 	}
 
 	return false;
+}
+
+template<typename T>
+T* HashMapGet(const HashMap<T>* map, const char* key) {
+	uint64_t hash = Hash(key);
+
+	if (map->data[hash].size == 0) {
+		return NULL;
+	}
+
+	DllNode<HashMapEntry<T>>* node = map->data[hash].head;
+	while (node) {
+		if (strcmp(node->data.key, key) == 0) {
+			return &node->data.value;
+		}
+
+		node = node->next;
+	}
+
+	return NULL;
 }
 
 template<typename T>
