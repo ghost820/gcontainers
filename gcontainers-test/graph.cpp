@@ -148,3 +148,34 @@ TEST(Graph, BFS)
 
 	DFS_Result.clear();
 }
+
+TEST(Graph, Dijkstra)
+{
+	Graph graph;
+	GraphInit(&graph);
+
+	GraphAddVertex(&graph, "A");
+	GraphAddVertex(&graph, "B");
+	GraphAddVertex(&graph, "C");
+	GraphAddVertex(&graph, "D");
+	GraphAddVertex(&graph, "E");
+	GraphAddVertex(&graph, "F");
+
+	GraphAddEdge(&graph, "A", "B", 4);
+	GraphAddEdge(&graph, "A", "C", 2);
+	GraphAddEdge(&graph, "B", "E", 3);
+	GraphAddEdge(&graph, "C", "D", 2);
+	GraphAddEdge(&graph, "C", "F", 4);
+	GraphAddEdge(&graph, "D", "E", 3);
+	GraphAddEdge(&graph, "D", "F", 1);
+	GraphAddEdge(&graph, "E", "F", 1);
+
+	DoublyLinkedList<const char*> result = Dijkstra(&graph, "A", "E");
+
+	ASSERT_EQ(5, result.size);
+	ASSERT_STREQ("A", result.head->data);
+	ASSERT_STREQ("C", result.head->next->data);
+	ASSERT_STREQ("D", result.head->next->next->data);
+	ASSERT_STREQ("F", result.head->next->next->next->data);
+	ASSERT_STREQ("E", result.head->next->next->next->next->data);
+}

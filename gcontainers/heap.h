@@ -25,6 +25,10 @@ void HeapInsert(T* heap, uint64_t size, const T* data) {
 
 template<typename T>
 void HeapRemoveRoot(T* heap, int64_t size) {
+	if (size == 0 || size == 1) {
+		return;
+	}
+
 	heap[0] = heap[size - 1];
 
 	size--;
