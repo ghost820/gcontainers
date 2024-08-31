@@ -21,57 +21,57 @@ TEST(Heap, Insert)
 	HeapInsert(heap, 6, &data6);
 	HeapInsert(heap, 7, &data7);
 
-	ASSERT_EQ(55, heap[0]);
-	ASSERT_EQ(39, heap[1]);
-	ASSERT_EQ(41, heap[2]);
-	ASSERT_EQ(18, heap[3]);
-	ASSERT_EQ(27, heap[4]);
-	ASSERT_EQ(12, heap[5]);
-	ASSERT_EQ(33, heap[6]);
+	ASSERT_EQ(12, heap[0]);
+	ASSERT_EQ(27, heap[1]);
+	ASSERT_EQ(18, heap[2]);
+	ASSERT_EQ(41, heap[3]);
+	ASSERT_EQ(33, heap[4]);
+	ASSERT_EQ(39, heap[5]);
+	ASSERT_EQ(55, heap[6]);
 }
 
 TEST(Heap, RemoveRoot)
 {
-	int heap[7] = { 55, 39, 41, 18, 27, 12, 33 };
+	int heap[7] = { 12, 27, 18, 41, 33, 39, 55 };
 
 	HeapRemoveRoot(heap, 7);
 
-	ASSERT_EQ(41, heap[0]);
-	ASSERT_EQ(39, heap[1]);
-	ASSERT_EQ(33, heap[2]);
-	ASSERT_EQ(18, heap[3]);
-	ASSERT_EQ(27, heap[4]);
-	ASSERT_EQ(12, heap[5]);
+	ASSERT_EQ(18, heap[0]);
+	ASSERT_EQ(27, heap[1]);
+	ASSERT_EQ(39, heap[2]);
+	ASSERT_EQ(41, heap[3]);
+	ASSERT_EQ(33, heap[4]);
+	ASSERT_EQ(55, heap[5]);
 
 	HeapRemoveRoot(heap, 6);
 
-	ASSERT_EQ(39, heap[0]);
-	ASSERT_EQ(27, heap[1]);
-	ASSERT_EQ(33, heap[2]);
-	ASSERT_EQ(18, heap[3]);
-	ASSERT_EQ(12, heap[4]);
+	ASSERT_EQ(27, heap[0]);
+	ASSERT_EQ(33, heap[1]);
+	ASSERT_EQ(39, heap[2]);
+	ASSERT_EQ(41, heap[3]);
+	ASSERT_EQ(55, heap[4]);
 
 	HeapRemoveRoot(heap, 5);
 
 	ASSERT_EQ(33, heap[0]);
-	ASSERT_EQ(27, heap[1]);
-	ASSERT_EQ(12, heap[2]);
-	ASSERT_EQ(18, heap[3]);
+	ASSERT_EQ(41, heap[1]);
+	ASSERT_EQ(39, heap[2]);
+	ASSERT_EQ(55, heap[3]);
 
 	HeapRemoveRoot(heap, 4);
 
-	ASSERT_EQ(27, heap[0]);
-	ASSERT_EQ(18, heap[1]);
-	ASSERT_EQ(12, heap[2]);
+	ASSERT_EQ(39, heap[0]);
+	ASSERT_EQ(41, heap[1]);
+	ASSERT_EQ(55, heap[2]);
 
 	HeapRemoveRoot(heap, 3);
 
-	ASSERT_EQ(18, heap[0]);
-	ASSERT_EQ(12, heap[1]);
+	ASSERT_EQ(41, heap[0]);
+	ASSERT_EQ(55, heap[1]);
 
 	HeapRemoveRoot(heap, 2);
 
-	ASSERT_EQ(12, heap[0]);
+	ASSERT_EQ(55, heap[0]);
 
 	HeapRemoveRoot(heap, 1);
 }

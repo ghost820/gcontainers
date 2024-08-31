@@ -14,7 +14,8 @@ void HeapInsert(T* heap, uint64_t size, const T* data) {
 	
 	uint64_t idx = size - 1;
 	uint64_t parentIdx = (idx - 1) / 2;
-	while (idx > 0 && heap[idx] > heap[parentIdx]) {
+	// Change second condition to heap[idx] > heap[parentIdx] for max heap.
+	while (idx > 0 && heap[idx] < heap[parentIdx]) {
 		Swap(&heap[idx], &heap[parentIdx]);
 	
 		idx = parentIdx;
@@ -38,13 +39,15 @@ void HeapRemoveRoot(T* heap, int64_t size) {
 
 		if (leftChildIdx < size) {
 			leftChild = &heap[leftChildIdx];
-			if (*leftChild > heap[idx]) {
+			// Change to > for max heap.
+			if (*leftChild < heap[idx]) {
 				swapIdx = leftChildIdx;
 			}
 		}
 		if (rightChildIdx < size) {
 			rightChild = &heap[rightChildIdx];
-			if (swapIdx == -1 && *rightChild > heap[idx] || swapIdx != -1 && *rightChild > *leftChild) {
+			// Change both to > for max heap.
+			if (swapIdx == -1 && *rightChild < heap[idx] || swapIdx != -1 && *rightChild < *leftChild) {
 				swapIdx = rightChildIdx;
 			}
 		}
