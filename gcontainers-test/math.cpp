@@ -61,3 +61,12 @@ TEST(GetDigit, Basic)
 	ASSERT_EQ(1, GetDigit(-12345, 4));
 	ASSERT_EQ(0, GetDigit(-12345, 5));
 }
+
+TEST(Fib, Basic)
+{
+	uint64_t mem[20] = { 0 };
+
+	uint64_t result = Fib(19, mem);
+
+	ASSERT_EQ(4181, result);
+}

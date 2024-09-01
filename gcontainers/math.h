@@ -68,3 +68,18 @@ uint64_t MostDigits(T* arr, uint64_t size)
 	}
 	return maxDigits;
 }
+
+uint64_t Fib(uint64_t n, uint64_t* mem)
+{
+	if (mem[n] != 0) {
+		return mem[n];
+	}
+
+	if (n <= 2) {
+		return 1;
+	}
+
+	mem[n] = Fib(n - 1, mem) + Fib(n - 2, mem);
+
+	return mem[n];
+}
